@@ -18,18 +18,38 @@ A useful financial tool needs to explain both the monthly outcome and the timing
 
 SmartFlow is designed for owners, finance managers, and operations managers who need to understand manufacturing-related financial exposure and compare practical responses.
 
-## 2. Product Workflow
+## 2. Product Workflow and Navigation
 
-1. **Assess:** Enter monthly receipts, expenses, financing obligations, opening cash, and financial goals.
-2. **Analyze:** Review cash flow, liquidity, debt-payment burden, and reserve headroom.
-3. **Simulate:** Apply individual or combined financial shocks.
-4. **Identify thresholds:** Calculate when cash flow or cash reserves reach a critical limit.
-5. **Explain risk:** Attribute deterioration to material costs, reduced collections, or other changes.
-6. **Compare responses:** Evaluate the financial effect of alternative business actions.
-7. **Plan:** Determine what changes are needed to reach a financial target.
-8. **Evaluate timing:** When dated information is available, analyze daily cash gaps and supplier-constrained recovery options.
+SmartFlow follows a simple user journey: **Enter business information, review financial health, explore risks, compare responses, and plan next steps.** Users can complete the core assessment without entering dated transactions or supplier information.
 
-The monthly model is the foundation for all calculations. The daily cash-flow and supplier modules extend this model without requiring users to change the original four-phase assessment.
+The application organizes its features into four main areas:
+
+| Area | Purpose | Features |
+|---|---|---|
+| **Overview** | Understand the current financial position | Four-phase questionnaire, financial dashboard, expense breakdown, and key alerts |
+| **Explore Risks** | See how financial changes affect the business | What-If Simulator, Risk Threshold Finder, Risk Driver Breakdown, and Cash Gap Navigator |
+| **Improve Cash Flow** | Compare responses to identified risks | Action Comparison Lab, Goal-Based Reverse Planner, and recovery planning |
+| **Advanced Tools** | Explore additional manufacturing and financing analysis | Manufacturing Margin Guard, stress-test heatmap, equipment financing, and reports |
+
+### 2.1 Main User Journey
+
+1. **Assess:** Complete the four-phase questionnaire or load the sample manufacturer.
+2. **Understand:** Review monthly net cash flow, projected ending cash, reserve headroom, and the most important financial finding.
+3. **Explore:** Test cost or collection changes, or inspect a dated cash shortage when sufficient schedule data is available.
+4. **Compare:** Evaluate potential responses, their financial effects, and any supplier or customer approval requirements.
+5. **Plan:** Select a target and review the actions and assumptions needed to reach it.
+
+### 2.2 Interface Principles
+
+- Provide a **Try Sample Business** option so users can explore SmartFlow without entering data manually.
+- Keep the four assessment phases, show progress, and preserve answers when navigating backward.
+- Show essential monthly questions first. Reveal dated transactions, supplier constraints, and unit economics only when the relevant analysis requires them.
+- Lead with plain-language conclusions and a small set of key financial metrics; keep detailed calculations and charts available on demand.
+- Use contextual actions such as **Test a Scenario**, **Find Cash Shortages**, and **Compare Your Options** instead of requiring users to navigate through every module.
+- Keep the baseline visible when comparing scenarios, and allow users to reset changes.
+- Clearly distinguish month-end cash results from temporary daily cash shortages and mark recovery actions as approved, conditional, or infeasible.
+
+The monthly model remains the foundation for all calculations. Daily cash-flow and supplier modules extend the assessment without making advanced inputs mandatory.
 
 ## 3. Product Differentiation
 
@@ -97,6 +117,8 @@ Display:
 - Baseline-versus-scenario differences in dollars and percentages where mathematically meaningful.
 
 A metric card must identify the reporting period and distinguish a monthly flow from a point-in-time cash balance. Undefined percentages should display as unavailable rather than as zero.
+
+The Overview should prioritize monthly net cash flow, projected ending cash, reserve headroom, and one contextual risk finding. Detailed payment charts and secondary metrics remain accessible without crowding the initial screen. Display a daily cash-shortage alert only when the dated schedule is complete and reconciled.
 
 ### 5.2 What-If Scenario Simulator
 
@@ -204,6 +226,16 @@ Cash Gap Navigator calculates daily cash availability from dated customer receip
 - Display a coverage warning if dated events omit monthly receipts or payment categories.
 - Never present a partial timeline as a complete liquidity forecast.
 - Keep the monthly baseline available when the timeline is absent or incomplete.
+
+**Find Cash Shortages page layout**
+
+1. **Cash summary:** Show the lowest projected end-of-day cash balance, its date, maximum reserve shortfall, first reserve breach, and projected month-end cash.
+2. **Daily cash chart:** Plot the cash balance by date with a visible minimum-reserve line and clear markers for the lowest balance and negative-cash periods.
+3. **Scheduled transactions:** Allow users to expand the dated customer receipts and payments behind the forecast.
+4. **Recovery comparison:** Show the original schedule beside supplier payment deferral, earlier customer collection, or a permitted combination. Recalculate the chart and metrics when a scenario is selected.
+5. **Assumptions and approval:** State which changes are authorized, which require external agreement, and whether the dated schedule reconciles with the monthly baseline.
+
+For the Green Bay Precision Components example, the original schedule has a **−$17,000 minimum on Day 10** and a **$37,000 reserve shortfall** against the $20,000 target. Moving the supplier payment to Day 18 raises the minimum to **$8,000**. Combining that change with the approved early collection of $12,000 raises the minimum to **$20,000**. Each scenario still ends with **$44,000** in cash. These values are calculated from dated events rather than stored as fixed display results.
 
 ### 5.13 Supplier Minimum Orders and Payment Terms
 
@@ -776,18 +808,21 @@ The initial integration milestone is a completed questionnaire producing correct
 - [ ] **E07 | P1: Calculate required payment reduction.** Done when: Target cash flow yields a verified savings amount.
 - [ ] **E08 | P1: Flag infeasible actions and limits.** Done when: Exceeding a selected cap cannot be labeled feasible.
 
-### Phase F: Frontend and Visualizations
+### Phase F: Frontend and User Experience
 
-- [ ] **F01 | P0: Build four-phase questionnaire.** Done when: Inputs survive navigation and retain values.
+- [ ] **F01 | P0: Build four-phase questionnaire.** Done when: Users can navigate between phases without losing answers, and optional advanced fields do not block the monthly assessment.
 - [ ] **F02 | P0: Validate required fields inline.** Done when: Incorrect entries produce readable messages.
-- [ ] **F03 | P0: Display key dashboard metrics.** Done when: Cards show correct amounts and reporting period.
-- [ ] **F04 | P0: Visualize payment categories.** Done when: Expense breakdown reconciles to totals.
+- [ ] **F03 | P0: Build a summary-first Overview.** Done when: Key cash metrics, reserve status, and a contextual risk finding are immediately visible.
+- [ ] **F04 | P0: Visualize payment categories on demand.** Done when: Users can inspect an expense breakdown that reconciles to totals.
 - [ ] **F05 | P0: Add scenario controls and reset.** Done when: Controls update baseline comparisons reliably.
 - [ ] **F06 | P0: Display break-even thresholds.** Done when: Undefined and exceeded thresholds are understandable.
 - [ ] **F07 | P1: Display risk-driver contributions.** Done when: Values reconcile to the scenario delta.
 - [ ] **F08 | P1: Build action comparison table.** Done when: Users can compare target and resulting figures.
 - [ ] **F09 | P1: Show goal-planning results.** Done when: Required changes and feasibility are visible.
-- [ ] **F10 | P0: Test on the intended demo screen.** Done when: No essential control is hidden or unusable.
+- [ ] **F10 | P0: Test on the intended demo screen.** Done when: Primary navigation, key results, and recovery actions are visible and usable.
+- [ ] **F11 | P0: Add sample-business entry and four-area navigation.** Done when: A first-time user can load the demo and reach Overview, Explore Risks, Improve Cash Flow, and Advanced Tools.
+- [ ] **F12 | P1: Connect risk findings to relevant next actions.** Done when: A cash-shortage warning opens the cash timeline with the correct baseline.
+- [ ] **F13 | P1: Test the complete first-time user journey.** Done when: An unfamiliar tester can load a sample, identify a cash risk, and compare two responses without guidance.
 
 ### Phase G: Application Integration
 
@@ -825,8 +860,8 @@ The initial integration milestone is a completed questionnaire producing correct
 - [ ] **I12 | P1: Recompute each recovery candidate.** Done when: Supplier deferral alone yields an $8,000 minimum.
 - [ ] **I13 | P1: Compare combined recovery actions.** Done when: Both approved changes yield a $20,000 minimum.
 - [ ] **I14 | P1: Report reserve target attainment and constraint status.** Done when: Each candidate is labeled feasible, conditional, or invalid.
-- [ ] **I15 | P1: Build cash timeline and reserve visualization.** Done when: The negative Day 10 balance and reserve floor are visible.
-- [ ] **I16 | P1: Build supplier form and recovery comparison view.** Done when: Invalid orders and approved options display correctly.
+- [ ] **I15 | P1: Build the Find Cash Shortages page.** Done when: Summary cards, dated cash chart, reserve floor, and expandable transactions identify the Day 10 shortfall.
+- [ ] **I16 | P1: Build supplier inputs and recovery comparison view.** Done when: Original, supplier-only, and combined recovery scenarios can be compared, with correct balances and approval states.
 - [ ] **I17 | P1: Integrate optional views without blocking monthly analysis.** Done when: Core workflow functions with no dated events.
 
 ### Phase J: Quality, Documentation, and Submission
