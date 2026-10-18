@@ -38,7 +38,7 @@ function SignInForm() {
         {error && <p id="signin-error" role="alert" className="text-sm font-medium text-[#8a2a16]">{error}</p>}
         <Button type="submit" size="lg" className="w-full">Sign in</Button>
       </form>
-      <div className="mt-5 rounded-2xl border border-dashed border-[var(--line)] p-3 text-sm leading-6 text-muted">
+      <div className="mt-5 rounded-2xl border border-dashed border-[var(--line)] p-3 text-sm leading-6 text-foreground/85">
         Demo login: <strong className="text-foreground/85">{DEMO_USERNAME}</strong> / <strong className="text-foreground/85">{DEMO_PASSWORD}</strong>
         <button type="button" onClick={() => { setUsername(DEMO_USERNAME); setPassword(DEMO_PASSWORD); setError(""); }} className="ml-2 font-semibold text-foreground underline underline-offset-4">Fill in</button>
       </div>
