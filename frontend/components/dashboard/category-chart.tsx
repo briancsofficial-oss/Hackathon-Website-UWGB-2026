@@ -34,7 +34,7 @@ export function CategoryChart({ txns, month }: { txns: Txn[]; month: string }) {
       </CardHeader>
       <CardContent>
         {data.length === 0 ? (
-          <p className="text-sm text-[var(--muted)]">
+          <p className="text-sm text-foreground/80">
             No spending found for this month.
           </p>
         ) : (
