@@ -3,8 +3,6 @@ import { extractText, getDocumentProxy } from "unpdf";
 import { parseStatementText } from "@/lib/parse-statement";
 import { MAX_FILE_BYTES } from "@/lib/types";
 
-export const runtime = "nodejs";
-
 // Reads one PDF bank statement in memory and returns parsed transactions. Nothing is written to disk or sent to OpenAI.
 export async function POST(request: Request) {
   try {
